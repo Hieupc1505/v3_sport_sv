@@ -30,6 +30,7 @@ async function initApp() {
 
     // express
     const app = expressLoader()
+    // require('./loaders/redisLoader')
 
     // monitor
     monitorLoader(app)

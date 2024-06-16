@@ -53,6 +53,11 @@ const env = {
         username: getOsEnv('SWAGGER_USERNAME'),
         password: getOsEnv('SWAGGER_PASSWORD'),
     },
+    img: {
+        CLOUDINARY_NAME: getOsEnv('CLOUDINARY_NAME'),
+        CLOUDINARY_API_KEY: getOsEnv('CLOUDINARY_API_KEY'),
+        CLOUDINARY_API_SECRET: getOsEnv('CLOUDINARY_API_SECRET'),
+    },
 }
 
 module.exports = env

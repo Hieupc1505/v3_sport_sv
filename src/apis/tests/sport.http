@@ -1,0 +1,55 @@
+@baseurl = http://localhost:3000
+@sportRoute = /api/v1/sports
+
+
+###
+GET {{baseurl}}{{sportRoute}}/17/standings/52186
+###
+GET {{baseurl}}{{sportRoute}}/1/standings/56953
+
+###
+GET {{baseurl}}{{sportRoute}}/1/matches/56953/round/1
+
+###
+GET {{baseurl}}{{sportRoute}}/league/17
+###
+GET {{baseurl}}{{sportRoute}}/league/17
+###
+GET {{baseurl}}{{sportRoute}}/seasons/17?season=undefinded
+###
+GET {{baseurl}}{{sportRoute}}/info
+###
+GET {{baseurl}}{{sportRoute}}/search?q=everton-fulham&t=1691848800&nation=england
+###
+POST {{baseurl}}{{sportRoute}}/search/1?q=italy-albania&pub=1718478000
+Content-Type: application/json
+
+{
+    "q" : "italy-albania",
+    "pub": 1718478000,
+    "id": 11873898
+}
+###
+GET {{baseurl}}{{sportRoute}}/search?league=7&nation=c1
+###
+GET {{baseurl}}{{sportRoute}}/update/match?league=1&name=euro
+# ###
+# POST {{baseurl}}{{sportRoute}}/update/league/1
+# Content-Type: application/json
+
+# {
+#     "data": {
+#         "list":"PL6C5fUPJxli0RAb1Qf_EUxebpukUxGyye",
+#         "channelId": "UCbxWTKqVmD_AMeOIcKFhQ3Q"
+#     }
+# }
+
+
+
+# unique-tournament/8/season/52376
+# unique-tournament/17/season/52186
+# unique-tournament/23/season/52760
+# unique-tournament/34/season/52571
+//7/52162
+
+//england/spain/italy/germany/france/c1

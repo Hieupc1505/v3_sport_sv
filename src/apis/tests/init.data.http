@@ -1,0 +1,83 @@
+@baseurl = http://localhost:3000
+
+GET {{baseurl}}/api/v1/init/write
+
+
+### Add TEams
+# GET {{baseurl}}/api/v1/init/add/teams?league=spain&season=52376
+
+### Add league
+# GET {{baseurl}}/api/v1/init/create/league?league=c1&season=52162
+
+
+# ## Create Match
+# GET {{baseurl}}/api/v1/init/create/matches?league=133&season=57114&length=3
+
+###
+GET {{baseurl}}/api/v1/init/update/teams?league=copa
+# ###
+# GET {{baseurl}}/api/v1/init/update/group?league=germany
+
+###
+# GET {{baseurl}}/api/v1/init/create/seasons
+
+###
+# GET {{baseurl}}/api/v1/init/update/league?league=7&name=c1
+
+
+###
+# GET {{baseurl}}/api/v1/init/create/teams/c1?league=c1&season=52162
+
+# ###
+# GET {{baseurl}}/api/v1/init/create/list?league=7&season=52162&nation=c1
+
+
+###
+POST {{baseurl}}/api/v1/init/add/all
+Content-Type: application/json
+
+{
+    "leagueId": "euro",
+    "img": "https://media.baobinhphuoc.com.vn/upload/news/5_2024/30991c65f571bec743217af83f21ffa8.jpg",
+    "channelId": "UCbxWTKqVmD_AMeOIcKFhQ3Q",
+    "name": "Euro",
+    "season": 56953,
+    "year": "2024",
+    "lengthRound": 3
+}
+###
+POST {{baseurl}}/api/v1/init/add/all
+Content-Type: application/json
+
+{
+    "leagueId": "copa",
+    "img": "https://images.mlssoccer.com/image/private/t_editorial_landscape_12_desktop/prd-league/ngc4flcw4hddlkpgzs10.jpg",
+    "name": "Copa América",
+    "season": 57114,
+    "year": "2024",
+    "lengthRound": 3
+}
+###
+POST {{baseurl}}/api/v1/init/update/league/1
+Content-Type: application/json
+
+{
+    "league": 1,
+    "data" : {
+         "list":"PL6C5fUPJxli0RAb1Qf_EUxebpukUxGyye",
+        "channelId" : "UCbxWTKqVmD_AMeOIcKFhQ3Q?"
+    }
+}
+
+
+# unique-tournament/8/season/52376 -> spain -> 42409
+# unique-tournament/17/season/52186 -> england ->41886
+# unique-tournament/23/season/52760 -> italy -> 42415
+# unique-tournament/34/season/52571 -> france ->42273
+//35/52608 -> germany ->42268
+//7/52162 -> c1 ->41897
+//1/56953
+
+
+###
+GET https://www.sofascore.com/api/v1/unique-tournament/17/season/52186/standings/total

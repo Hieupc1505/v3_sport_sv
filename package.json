@@ -7,11 +7,12 @@
     "license": "MIT",
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon src/app.js",
-        "start": "cross-env NODE_ENV=development node src/app.js"
+        "start": "cross-env NODE_ENV=production node src/app.js"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "chalk": "^4.1.2",
+        "cloudinary": "^2.2.0",
         "compression": "^1.7.4",
         "cors": "^2.8.5",
         "cross-env": "^7.0.3",
@@ -23,8 +24,10 @@
         "express-status-monitor": "trantoan960/express-status-monitor",
         "figlet": "^1.5.2",
         "helmet": "^4.6.0",
+        "http-errors": "^2.0.0",
         "http-status": "^1.5.0",
         "husky": "^7.0.2",
+        "ioredis": "^5.4.1",
         "joi": "^17.4.2",
         "jsonwebtoken": "^8.5.1",
         "moment": "^2.29.1",
@@ -32,6 +35,7 @@
         "morgan": "^1.10.0",
         "passport": "^0.4.1",
         "passport-jwt": "^4.0.0",
+        "redis": "^4.6.14",
         "serve-favicon": "^2.5.0",
         "swagger-jsdoc": "^6.1.0",
         "swagger-ui-express": "^4.1.6",
