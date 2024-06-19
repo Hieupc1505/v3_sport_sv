@@ -27,7 +27,7 @@ jobs:
             - run: npm ci
 
             - name: Deploy to my EC2 instance
-              uses: easingthemes/ssh-deploy@2.1.5
+              uses: easingthemes/ssh-deploy@v3.0.1
               env:
                   APP_NAME: ${{secrets.APP_NAME}}
                   APP_SCHEMA: ${{secrets.APP_SCHEMA}}
