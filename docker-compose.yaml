@@ -1,0 +1,6 @@
+version: '3'
+services:
+    v3sports:
+        image: hieupc05/v3_api_sports:0.0.1.RELEASE
+        build:
+            context: .

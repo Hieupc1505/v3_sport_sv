@@ -41,12 +41,12 @@ var that = (module.exports = {
         })
     }),
     searchVideo: catchAsync(async (req, res) => {
-        const { q, pub, id } = req.body
+        const { q, pub, id, slug } = req.body
         const { league } = req.params
         // console.log(nation, q, c, pub)
         return res.status(200).json({
             success: true,
-            data: await getVideo(league, q, pub, id),
+            data: await getVideo(league, q, pub, id, slug),
         })
     }),
     updateResult: catchAsync(async (req, res) => {

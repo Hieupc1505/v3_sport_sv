@@ -58,6 +58,10 @@ const env = {
         CLOUDINARY_API_KEY: getOsEnv('CLOUDINARY_API_KEY'),
         CLOUDINARY_API_SECRET: getOsEnv('CLOUDINARY_API_SECRET'),
     },
+    yt_v3: {
+        LINK_SEARCH: getOsEnv('LINK_SEARCH'),
+        KEY_API: getOsEnv('KEY_API'),
+    },
 }
 
 module.exports = env

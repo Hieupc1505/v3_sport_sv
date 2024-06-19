@@ -99,12 +99,13 @@ var that = (module.exports = {
         return _Leagues.find({}).lean()
     },
 
-    getVideo: async (league, query, t, matchid, day = -1) => {
+    getVideo: async (league, query, t, matchid, slug = null, day = -5) => {
         let time = new Date(t * 1000 + day * 24 * 60 * 60 * 1000).toISOString()
         const lg = await _Leagues.findOne({ id: league })
         if (!lg.channelId) return null
         try {
-            const result = await getVideoFromYTB(query, time, lg.channelId)
+            const q = slug ? slug : query
+            const result = await getVideoFromYTB(q, time, lg.channelId)
 
             if (result) {
                 let hl = await _HighLight.findOne({ videoId: result.id.videoId })
@@ -116,7 +117,7 @@ var that = (module.exports = {
                         publishedAt: new Date(result.snippet.publishedAt).getTime(),
                     })
                 }
-                console.log(hl._id, matchid)
+
                 await _Matches.findOneAndUpdate(
                     {
                         id: matchid,
@@ -190,31 +191,19 @@ const convertTime = (day) => {
     return Math.floor((new Date().getTime() + day * 24 * 60 * 60 * 1000) / 1000)
 }
 const getVideoFromYTB = async (q, t, channel) => {
-    const { data } = await axios({
-        method: 'GET',
-        url: env.yt_v3.LINK_SEARCH,
-        params: {
-            part: 'snippet',
-            maxResults: '4',
-            key: env.yt_v3.KEY_API,
-            q,
-            publishedAfter: t,
-            publishedBefore: new Date(new Date(t).getTime() + 5 * 24 * 60 * 60 * 1000).toISOString(),
-            regionCode: 'VN',
-        },
-    })
+    const { data } = await axios(getUrl(channel, q))
 
-    const result = data.items.filter((item) => item.snippet.channelId === channel)
+    const result = data.items.filter((item) => compareTimeGte(item.snippet.publishedAt, t))
     return result.length ? result[0] : null
 }
 
-function getUrl(q, t) {
+function getUrl(channel, q) {
     var mykey = env.yt_v3.KEY_API,
-        URL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=4&publishedAfter=${new Date(
-            t * 1000
-        ).toISOString()}&publishedBefore=${new Date(
-            t * 1000 + 5 * 24 * 60 * 60 * 1000
-        ).toISOString()}&q=${q}&regionCode=VN&key=${mykey}`
+        URL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channel}&maxResults=4&q=${q}&regionCode=VN&key=${mykey}`
 
     return URL
+}
+
+function compareTimeGte(t, u) {
+    return new Date(t) >= new Date(u)
 }

@@ -32,6 +32,10 @@ const defaultRoutes = [
     },
 ]
 
+router.get('/', (req, res) => {
+    res.status(200).send('Server api is ready!!')
+})
+
 defaultRoutes.forEach((route) => {
     router.use(route.path, route.route)
 })

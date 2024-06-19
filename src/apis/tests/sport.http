@@ -25,9 +25,10 @@ POST {{baseurl}}{{sportRoute}}/search/1?q=italy-albania&pub=1718478000
 Content-Type: application/json
 
 {
-    "q" : "italy-albania",
-    "pub": 1718478000,
-    "id": 11873898
+    "q" : "netherlands-poland",
+    "pub": 1718542800,
+    "id": 12198302,
+    "slug": "ba lan - ha lan"
 }
 ###
 GET {{baseurl}}{{sportRoute}}/search?league=7&nation=c1

@@ -4,25 +4,56 @@
 name: Node.js CI server/sports
 
 on:
-  push:
-    branches: [ "main" ]
+    push:
+        branches: ['main']
 
 jobs:
-  build:
+    build:
+        runs-on: self-hosted
 
-    runs-on: self-hosted
+        strategy:
+            matrix:
+                node-version: [20.x]
+                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        steps:
+            - uses: actions/checkout@v4
 
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'npm'
+            - run: npm ci
 
+            - name: Deploy to my EC2 instance
+              uses: easingthemes/ssh-deploy@2.1.5
+              env:
+                  APP_NAME: ${{secrets.APP_NAME}}
+                  APP_SCHEMA: ${{secrets.APP_SCHEMA}}
+                  APP_HOST: ${{secrets.APP_HOST}}
+                  APP_PORT: ${{secrets.APP_PORT}}
+                  APP_ROUTE_PREFIX: ${{secrets.APP_ROUTE_PREFIX}}
+                  APP_BANNER: ${{secrets.APP_BANNER}}
+                  LOG_LEVEL: ${{secrets.LOG_LEVEL}}
+                  LOG_OUTPUT: ${{secrets.LOG_OUTPUT}}
+                  DB_CONNECTION: ${{secrets.DB_CONNECTION}}
+                  DB_DATABASE: ${{secrets.DB_DATABASE}}
+                  DB_LOGGING: ${{secrets.DB_LOGGING}}
+                  DB_LOGGER: ${{secrets.DB_LOGGER}}
+                  PASSPORT_JWT: ${{secrets.PASSPORT_JWT}}
+                  PASSPORT_JWT_ACCESS_EXPIRED: ${{secrets.PASSPORT_JWT_ACCESS_EXPIRED}}
+                  PASSPORT_JWT_REFRESH_EXPIRED: ${{secrets.PASSPORT_JWT_REFRESH_EXPIRED}}
+                  SWAGGER_ENABLED: ${{secrets.SWAGGER_ENABLED}}
+                  SWAGGER_ROUTE: ${{secrets.SWAGGER_ROUTE}}
+                  SWAGGER_USERNAME: ${{secrets.SWAGGER_USERNAME}}
+                  SWAGGER_PASSWORD: ${{secrets.SWAGGER_PASSWORD}}
+                  MONITOR_ENABLED: ${{secrets.MONITOR_ENABLED}}
+                  MONITOR_ROUTE: ${{secrets.MONITOR_ROUTE}}
+                  MONITOR_USERNAME: ${{secrets.MONITOR_USERNAME}}
+                  MONITOR_PASSWORD: ${{secrets.MONITOR_PASSWORD}}
+                  CLOUDINARY_NAME: ${{secrets.CLOUDINARY_NAME}}
+                  CLOUDINARY_API_KEY: ${{secrets.CLOUDINARY_API_KEY}}
+                  CLOUDINARY_API_SECRET: ${{secrets.CLOUDINARY_API_SECRET}}
+                  KEY_API: ${{secrets.KEY_API}}
+                  LINK_SEARCH: ${{secrets.LINK_SEARCH}}
